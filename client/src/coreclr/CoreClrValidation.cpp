@@ -13,6 +13,7 @@ namespace fs = std::filesystem;
 
 std::string CoreClr::GetBaseCdnUrl() const {
     static auto branch = _core->GetBranch();
+    if (branch == "internal") branch = "dev";
     return "https://cdn.alt-mp.com/coreclr-client-module/" + branch + "/x64_win32/";
 }
 

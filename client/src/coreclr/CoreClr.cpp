@@ -195,7 +195,7 @@ uint8_t GetCachedAssembly(const char* name, int* bufferSize, void** buffer) {
     std::stringstream contentStream;
     auto fileName = std::string("lib/net6.0/") + name + ".dll";
     if (!zip.has_file(fileName)) {
-        cs::Log::Warning << "Nupkg was found, but no dll was found in it" << cs::Log::Endl;
+        cs::Log::Warning << "Nupkg was found, but no dll was found in it " << fileName << cs::Log::Endl;
         zip.printdir();
         return false;
     }
