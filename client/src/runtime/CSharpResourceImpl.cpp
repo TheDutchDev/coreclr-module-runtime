@@ -36,6 +36,8 @@ void CSharpResourceImpl::OnEvent(const alt::CEvent* ev)
 {
     if (ev == nullptr) return;
     auto scope = resource->PushNativesScope();
+
+    // TODO: no need in dynamic_cast for events
     switch (ev->GetType())
     {
     case alt::CEvent::Type::SERVER_SCRIPT_EVENT:
@@ -165,21 +167,27 @@ void CSharpResourceImpl::OnEvent(const alt::CEvent* ev)
     case alt::CEvent::Type::PLAYER_ENTER_VEHICLE:
         {
             auto playerEnterVehicleEvent = dynamic_cast<const alt::CPlayerEnterVehicleEvent*>(ev);
-            OnPlayerEnterVehicleDelegate(playerEnterVehicleEvent->GetTarget(),
+            auto target = playerEnterVehicleEvent->GetTarget();
+            OnPlayerEnterVehicleDelegate(Util_GetBaseObjectPointer(target),
+                                         target->GetType(),
                                          playerEnterVehicleEvent->GetSeat());
             break;
         }
     case alt::CEvent::Type::PLAYER_LEAVE_VEHICLE:
         {
             auto playerLeaveVehicleEvent = dynamic_cast<const alt::CPlayerLeaveVehicleEvent*>(ev);
-            OnPlayerLeaveVehicleDelegate(playerLeaveVehicleEvent->GetTarget(),
+            auto target = playerLeaveVehicleEvent->GetTarget();
+            OnPlayerLeaveVehicleDelegate(Util_GetBaseObjectPointer(target),
+                                         target->GetType(),
                                          playerLeaveVehicleEvent->GetSeat());
             break;
         }
     case alt::CEvent::Type::PLAYER_CHANGE_VEHICLE_SEAT:
         {
             auto playerChangeVehicleSeatEvent = dynamic_cast<const alt::CPlayerChangeVehicleSeatEvent*>(ev);
-            OnPlayerChangeVehicleSeatDelegate(playerChangeVehicleSeatEvent->GetTarget(),
+            auto target = playerChangeVehicleSeatEvent->GetTarget();
+            OnPlayerChangeVehicleSeatDelegate(Util_GetBaseObjectPointer(target),
+                                              target->GetType(),
                                               playerChangeVehicleSeatEvent->GetOldSeat(),
                                               playerChangeVehicleSeatEvent->GetNewSeat());
             break;
@@ -187,7 +195,9 @@ void CSharpResourceImpl::OnEvent(const alt::CEvent* ev)
     case alt::CEvent::Type::PLAYER_CHANGE_ANIMATION_EVENT:
         {
             auto playerAnimationChangeEvent = dynamic_cast<const alt::CPlayerChangeAnimationEvent*>(ev);
-            OnPlayerChangeAnimationDelegate(playerAnimationChangeEvent->GetTarget(),
+            auto target = playerAnimationChangeEvent->GetTarget();
+            OnPlayerChangeAnimationDelegate(Util_GetBaseObjectPointer(target),
+                                            target->GetType(),
                                             playerAnimationChangeEvent->GetOldAnimationDict(),
                                             playerAnimationChangeEvent->GetNewAnimationDict(),
                                             playerAnimationChangeEvent->GetOldAnimationName(),
@@ -199,7 +209,9 @@ void CSharpResourceImpl::OnEvent(const alt::CEvent* ev)
             auto playerChangeInteriorEvent = dynamic_cast<const alt::CPlayerChangeInteriorEvent*>(ev);
             auto oldInteriorLocation = playerChangeInteriorEvent->GetOldInteriorLocation();
             auto newInteriorLocation = playerChangeInteriorEvent->GetNewInteriorLocation();
-            OnPlayerChangeInteriorDelegate(playerChangeInteriorEvent->GetTarget(),
+            auto target = playerChangeInteriorEvent->GetTarget();
+            OnPlayerChangeInteriorDelegate(Util_GetBaseObjectPointer(target),
+                                           target->GetType(),
                                            oldInteriorLocation,
                                            newInteriorLocation);
             break;
@@ -270,64 +282,18 @@ void CSharpResourceImpl::OnEvent(const alt::CEvent* ev)
         {
             auto gameEntityCreateEvent = dynamic_cast<const alt::CGameEntityCreateEvent*>(ev);
             auto entity = gameEntityCreateEvent->GetTarget();
-            auto type = static_cast<uint8_t>(entity->GetType());
-            void* ptr;
 
-            switch (entity->GetType())
-            {
-            case alt::IBaseObject::Type::PLAYER:
-                ptr = dynamic_cast<alt::IPlayer*>(entity);
-                break;
-            case alt::IBaseObject::Type::VEHICLE:
-                ptr = dynamic_cast<alt::IVehicle*>(entity);
-                break;
-            case alt::IBaseObject::Type::LOCAL_OBJECT:
-                ptr = dynamic_cast<alt::ILocalObject*>(entity);
-                break;
-            case alt::IBaseObject::Type::PED:
-                ptr = dynamic_cast<alt::IPed*>(entity);
-                break;
-            case alt::IBaseObject::Type::OBJECT:
-                ptr = dynamic_cast<alt::IObject*>(entity);
-                break;
-            default:
-                ptr = nullptr;
-            }
-
-            OnGameEntityCreateDelegate(ptr,
-                                       type);
+            OnGameEntityCreateDelegate(Util_GetEntityPointer(entity),
+                                       entity->GetType());
             break;
         }
     case alt::CEvent::Type::GAME_ENTITY_DESTROY:
         {
             auto gameEntityDestroyEvent = dynamic_cast<const alt::CGameEntityDestroyEvent*>(ev);
             auto entity = gameEntityDestroyEvent->GetTarget();
-            auto type = static_cast<uint8_t>(entity->GetType());
-            void* ptr;
 
-            switch (entity->GetType())
-            {
-            case alt::IBaseObject::Type::PLAYER:
-                ptr = dynamic_cast<alt::IPlayer*>(entity);
-                break;
-            case alt::IBaseObject::Type::VEHICLE:
-                ptr = dynamic_cast<alt::IVehicle*>(entity);
-                break;
-            case alt::IBaseObject::Type::LOCAL_OBJECT:
-                ptr = dynamic_cast<alt::ILocalObject*>(entity);
-                break;
-            case alt::IBaseObject::Type::PED:
-                ptr = dynamic_cast<alt::IPed*>(entity);
-                break;
-            case alt::IBaseObject::Type::OBJECT:
-                ptr = dynamic_cast<alt::IObject*>(entity);
-                break;
-            default:
-                ptr = nullptr;
-            }
-
-            OnGameEntityDestroyDelegate(ptr,
-                                        type);
+            OnGameEntityDestroyDelegate(Util_GetEntityPointer(entity),
+                                        entity->GetType());
             break;
         }
 #pragma endregion
@@ -541,7 +507,9 @@ void CSharpResourceImpl::OnEvent(const alt::CEvent* ev)
             auto playerPointer = Util_GetEntityPointer(player);
 
             OnPlayerStartEnterVehicleDelegate(targetPointer,
+                                              target->GetType(),
                                               playerPointer,
+                                              player->GetType(),
                                               playerStartEnterVehicleEvent->GetSeat());
             break;
         }
@@ -555,7 +523,9 @@ void CSharpResourceImpl::OnEvent(const alt::CEvent* ev)
             auto playerPointer = Util_GetEntityPointer(player);
 
             OnPlayerStartLeaveVehicleDelegate(targetPointer,
+                                              target->GetType(),
                                               playerPointer,
+                                              player->GetType(),
                                               playerStartLeaveVehicleEvent->GetSeat());
             break;
         }
@@ -985,10 +955,10 @@ void CSharpResourceImpl::ResetDelegates() {
     OnRmlEventDelegate = [](auto var, auto var2, auto var3) {};
     OnAudioEventDelegate = [](auto var, auto var2, auto var3, auto var4) {};
 
-    OnPlayerSpawnDelegate = [](){};
-    OnPlayerDisconnectDelegate = [](){};
-    OnPlayerEnterVehicleDelegate = [](auto var, auto var2) {};
-    OnPlayerLeaveVehicleDelegate = [](auto var, auto var2) {};
+    OnPlayerSpawnDelegate = []{};
+    OnPlayerDisconnectDelegate = []{};
+    OnPlayerEnterVehicleDelegate = [](auto var, auto var2, auto var3) {};
+    OnPlayerLeaveVehicleDelegate = [](auto var, auto var2, auto var3) {};
 
     OnGameEntityCreateDelegate = [](auto var, auto var2) {};
     OnGameEntityDestroyDelegate = [](auto var, auto var2) {};
@@ -1000,11 +970,11 @@ void CSharpResourceImpl::ResetDelegates() {
     OnKeyUpDelegate = [](auto var) {};
     OnKeyDownDelegate = [](auto var) {};
 
-    OnPlayerChangeVehicleSeatDelegate = [](auto var, auto var2, auto var3) {};
-    OnPlayerChangeAnimationDelegate = [](auto var, auto var2, auto var3, auto var4, auto var5) {};
-    OnPlayerChangeInteriorDelegate = [](auto var, auto var2, auto var3) {};
+    OnPlayerChangeVehicleSeatDelegate = [](auto var, auto var2, auto var3, auto var4) {};
+    OnPlayerChangeAnimationDelegate = [](auto var, auto var2, auto var3, auto var4, auto var5, auto var6) {};
+    OnPlayerChangeInteriorDelegate = [](auto var, auto var2, auto var3, auto var4) {};
 
-    OnConnectionCompleteDelegate = []() {};
+    OnConnectionCompleteDelegate = []{};
 
     OnGlobalMetaChangeDelegate = [](auto var, auto var2, auto var3) {};
     OnGlobalSyncedMetaChangeDelegate = [](auto var, auto var2, auto var3) {};
@@ -1038,8 +1008,8 @@ void CSharpResourceImpl::ResetDelegates() {
 
     OnEntityHitEntityDelegate = [](auto var, auto var2, auto var3, auto var4, auto var5) {};
 
-    OnPlayerStartEnterVehicleDelegate = [](auto var, auto var2, auto var3) {};
-    OnPlayerStartLeaveVehicleDelegate = [](auto var, auto var2, auto var3) {};
+    OnPlayerStartEnterVehicleDelegate = [](auto var, auto var2, auto var3, auto var4, auto var5) {};
+    OnPlayerStartLeaveVehicleDelegate = [](auto var, auto var2, auto var3, auto var4, auto var5) {};
 
     OnPlayerBulletHitDelegate = [](auto var, auto var2, auto var3, auto var4) {};
 

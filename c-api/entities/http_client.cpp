@@ -29,7 +29,7 @@ void MarshalStringDict(alt::IMValueDict* map, const char**& keys, const char**& 
     for(auto it = map->Begin(); it != map->End(); ++it)
     {
         auto key = it->first;
-        auto value = std::dynamic_pointer_cast<const alt::IMValueString>(it->second)->Value();
+        auto value = std::static_pointer_cast<const alt::IMValueString>(it->second)->Value();
 
         auto keyStr = key.c_str();
         auto keySize = key.size();
