@@ -43,6 +43,8 @@ if(DYNAMIC_BUILD)
     )
     include_directories(${TARGET_NAME} PRIVATE "src" "thirdparty" "..")
     add_dependencies(${TARGET_NAME} csharp-alt-sdk)
+
+    include_directories(${TARGET_NAME}-static PRIVATE "${CMAKE_SOURCE_DIR}/altv-deps/miniz")
 else()
     add_library(${TARGET_NAME}-static STATIC "${PROJECT_SOURCE_FILES}" "${CAPI_FILES}")
     target_compile_definitions(${PROJECT_NAME}-static PRIVATE
@@ -50,4 +52,6 @@ else()
     )
     include_directories(${TARGET_NAME}-static PRIVATE "src" "thirdparty" ${ALTV_CSHARP_CPP_SDK})
     # add_dependencies(${TARGET_NAME}-static csharp-alt-sdk)
+
+    include_directories(${TARGET_NAME}-static PRIVATE "${CMAKE_SOURCE_DIR}/altv-deps/miniz")
 endif()
