@@ -1,6 +1,6 @@
 #include "func_table.h"
 
-inline uint64_t capiHash = 78812385462098472UL;
+inline uint64_t capiHash = 4464148992254491289UL;
 inline uint64_t capiHashes[] = {
     0,
     #ifdef ALT_CLIENT_API
@@ -211,6 +211,7 @@ inline uint64_t capiHashes[] = {
     11543552066785919265UL,
     15255809094076439747UL,
     84574382701044016UL,
+    6341556497973967320UL,
     2950682702415179672UL,
     3186817815537256556UL,
     4203146524234440953UL,
@@ -1992,6 +1993,7 @@ inline void* capiPointers[] = {
     (void*) Core_OverrideFocusEntity,
     (void*) Core_OverrideFocusPosition,
     (void*) Core_RegisterFont,
+    (void*) Core_ReloadVehiclePhysics,
     (void*) Core_RemoveGXTText,
     (void*) Core_RemoveIpl,
     (void*) Core_RemoveVoiceFilter,
