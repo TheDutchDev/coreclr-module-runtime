@@ -2159,6 +2159,11 @@ uint64_t Core_GetServerTime(alt::ICore* core)
 {
     return core->GetServerTime();
 }
+
+uint8_t Core_ReloadVehiclePhysics(alt::ICore* core, uint32_t modelHash)
+{
+    return core->ReloadVehiclePhysics(modelHash);
+}
 #endif
 
 CAPI_END()
