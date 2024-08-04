@@ -1,6 +1,6 @@
 #include "func_table.h"
 
-inline uint64_t capiHash = 14417011119465511955UL;
+inline uint64_t capiHash = 8028889173226987673UL;
 inline uint64_t capiHashes[] = {
     0,
     #ifdef ALT_CLIENT_API
@@ -666,6 +666,8 @@ inline uint64_t capiHashes[] = {
     9716002269308828916UL,
     11483934154441286346UL,
     13303370691287708161UL,
+    5271385185182015743UL,
+    883185529540149226UL,
     1338791052731372072UL,
     13382865868223894905UL,
     13422594452494959622UL,
@@ -824,6 +826,8 @@ inline uint64_t capiHashes[] = {
     18123777833957296121UL,
     15515593616288926025UL,
     10533830814607560700UL,
+    17284682775935975738UL,
+    8015620088058696041UL,
     14037400183140364255UL,
     3095801372631152772UL,
     2293924763385881861UL,
@@ -2449,6 +2453,8 @@ inline void* capiPointers[] = {
     (void*) Vehicle_GetSpeedVector,
     (void*) Vehicle_GetSuspensionHeight,
     (void*) Vehicle_GetWheelCamber,
+    (void*) Vehicle_GetWheelConfigFlag,
+    (void*) Vehicle_GetWheelDynamicFlag,
     (void*) Vehicle_GetWheelHeight,
     (void*) Vehicle_GetWheelRimRadius,
     (void*) Vehicle_GetWheelSpeed,
@@ -2607,6 +2613,8 @@ inline void* capiPointers[] = {
     (void*) Vehicle_SetSuspensionHeight,
     (void*) Vehicle_SetupTransmission,
     (void*) Vehicle_SetWheelCamber,
+    (void*) Vehicle_SetWheelConfigFlag,
+    (void*) Vehicle_SetWheelDynamicFlag,
     (void*) Vehicle_SetWheelHeight,
     (void*) Vehicle_SetWheelRimRadius,
     (void*) Vehicle_SetWheelTrackWidth,

@@ -479,3 +479,8 @@ EXPORT_CLIENT void Vehicle_SetSuspensionHeight(alt::IVehicle* vehicle, float val
 EXPORT_CLIENT void Vehicle_SetupTransmission(alt::IVehicle* vehicle);
 
 EXPORT_SERVER void Vehicle_SetBadge(alt::IVehicle* vehicle, uint32_t textureDictionary, uint32_t texture, vehicleBadgePosition_t vehicleBadgePosition[], uint16_t size);
+
+EXPORT_CLIENT uint8_t Vehicle_GetWheelDynamicFlag(alt::IVehicle* vehicle, uint8_t wheelId, uint32_t flag);
+EXPORT_CLIENT void Vehicle_SetWheelDynamicFlag(alt::IVehicle* vehicle, uint8_t wheelId, uint32_t flag, uint8_t state);
+EXPORT_CLIENT uint8_t Vehicle_GetWheelConfigFlag(alt::IVehicle* vehicle, uint8_t wheelId, uint32_t flag);
+EXPORT_CLIENT void Vehicle_SetWheelConfigFlag(alt::IVehicle* vehicle, uint8_t wheelId, uint32_t flag, uint8_t state);

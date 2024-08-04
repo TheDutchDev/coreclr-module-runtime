@@ -1742,6 +1742,26 @@ void Vehicle_SetupTransmission(alt::IVehicle* vehicle)
     vehicle->SetupTransmission();
 }
 
+uint8_t Vehicle_GetWheelDynamicFlag(alt::IVehicle* vehicle, uint8_t wheelId, uint32_t flag)
+{
+    return vehicle->GetWheelDynamicFlag(wheelId, flag);
+}
+
+void Vehicle_SetWheelDynamicFlag(alt::IVehicle* vehicle, uint8_t wheelId, uint32_t flag, uint8_t state)
+{
+    vehicle->SetWheelDynamicFlag(wheelId, flag, state);
+}
+
+uint8_t Vehicle_GetWheelConfigFlag(alt::IVehicle* vehicle, uint8_t wheelId, uint32_t flag)
+{
+    return vehicle->GetWheelConfigFlag(wheelId, flag);
+}
+
+void Vehicle_SetWheelConfigFlag(alt::IVehicle* vehicle, uint8_t wheelId, uint32_t flag, uint8_t state)
+{
+    vehicle->SetWheelConfigFlag(wheelId, flag, state);
+}
+
 #endif
 
 CAPI_END()
