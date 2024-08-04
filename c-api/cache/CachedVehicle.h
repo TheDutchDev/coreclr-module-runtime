@@ -950,9 +950,16 @@ namespace cache
         {
 	        return _suspensionHeight;
         }
-        void SetSuspensionHeight(float value) override {}
 
+        void SetSuspensionHeight(float value) override {}
         void SetSteeringAngle(float value) override {}
+
+        bool GetWheelDynamicFlag(uint8_t wheel, uint32_t flag) const override { return false; };
+        void SetWheelDynamicFlag(uint8_t wheel, uint32_t flag, bool state) override {};
+        bool GetWheelConfigFlag(uint8_t wheel, uint32_t flag) const override { return false; };
+        void SetWheelConfigFlag(uint8_t wheel, uint32_t flag, bool state) override {};
+
+        void SetupTransmission() override {};
 #endif
 
     };
