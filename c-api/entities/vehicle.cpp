@@ -1242,13 +1242,13 @@ void Vehicle_Handling_SetDriveBiasFront(alt::IVehicle* vehicle, float value) {
     vehicle->GetHandling()->SetDriveBiasFront(value);
 }
 
-float Vehicle_Handling_GetAcceleration(alt::IVehicle* vehicle) {
-    return vehicle->GetHandling()->GetAcceleration();
+float Vehicle_Handling_GetDriveBiasRear(alt::IVehicle* vehicle) {
+    return vehicle->GetHandling()->GetDriveBiasRear();
 }
 
-void Vehicle_Handling_SetAcceleration(alt::IVehicle* vehicle, float value) {
+void Vehicle_Handling_SetDriveBiasRear(alt::IVehicle* vehicle, float value) {
     vehicle->ReplaceHandling();
-    vehicle->GetHandling()->SetAcceleration(value);
+    vehicle->GetHandling()->SetDriveBiasRear(value);
 }
 
 uint32_t Vehicle_Handling_GetInitialDriveGears(alt::IVehicle* vehicle) {
@@ -1296,13 +1296,13 @@ void Vehicle_Handling_SetInitialDriveForce(alt::IVehicle* vehicle, float value) 
     vehicle->GetHandling()->SetInitialDriveForce(value);
 }
 
-float Vehicle_Handling_GetDriveMaxFlatVel(alt::IVehicle* vehicle) {
-    return vehicle->GetHandling()->GetDriveMaxFlatVel();
+float Vehicle_Handling_GetInitialDriveMaxVel(alt::IVehicle* vehicle) {
+    return vehicle->GetHandling()->GetInitialDriveMaxVel();
 }
 
-void Vehicle_Handling_SetDriveMaxFlatVel(alt::IVehicle* vehicle, float value) {
+void Vehicle_Handling_SetInitialDriveMaxVel(alt::IVehicle* vehicle, float value) {
     vehicle->ReplaceHandling();
-    vehicle->GetHandling()->SetDriveMaxFlatVel(value);
+    vehicle->GetHandling()->SetInitialDriveMaxVel(value);
 }
 
 float Vehicle_Handling_GetInitialDriveMaxFlatVel(alt::IVehicle* vehicle) {
@@ -1735,6 +1735,11 @@ uint32_t Vehicle_Handling_GetDamageFlags(alt::IVehicle* vehicle) {
 void Vehicle_Handling_SetDamageFlags(alt::IVehicle* vehicle, uint32_t value) {
     vehicle->ReplaceHandling();
     vehicle->GetHandling()->SetDamageFlags(value);
+}
+
+void Vehicle_SetupTransmission(alt::IVehicle* vehicle)
+{
+    vehicle->SetupTransmission();
 }
 
 #endif
