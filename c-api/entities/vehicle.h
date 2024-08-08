@@ -351,8 +351,8 @@ EXPORT_CLIENT float Vehicle_Handling_GetPercentSubmergedRatio(alt::IVehicle* veh
 EXPORT_CLIENT void Vehicle_Handling_SetPercentSubmergedRatio(alt::IVehicle* vehicle, float value);
 EXPORT_CLIENT float Vehicle_Handling_GetDriveBiasFront(alt::IVehicle* vehicle);
 EXPORT_CLIENT void Vehicle_Handling_SetDriveBiasFront(alt::IVehicle* vehicle, float value);
-EXPORT_CLIENT float Vehicle_Handling_GetAcceleration(alt::IVehicle* vehicle);
-EXPORT_CLIENT void Vehicle_Handling_SetAcceleration(alt::IVehicle* vehicle, float value);
+EXPORT_CLIENT void Vehicle_Handling_SetDriveBiasRear(alt::IVehicle* vehicle, float value);
+EXPORT_CLIENT float Vehicle_Handling_GetDriveBiasRear(alt::IVehicle* vehicle);
 EXPORT_CLIENT uint32_t Vehicle_Handling_GetInitialDriveGears(alt::IVehicle* vehicle);
 EXPORT_CLIENT void Vehicle_Handling_SetInitialDriveGears(alt::IVehicle* vehicle, uint32_t value);
 EXPORT_CLIENT float Vehicle_Handling_GetDriveInertia(alt::IVehicle* vehicle);
@@ -363,8 +363,10 @@ EXPORT_CLIENT float Vehicle_Handling_GetClutchChangeRateScaleDownShift(alt::IVeh
 EXPORT_CLIENT void Vehicle_Handling_SetClutchChangeRateScaleDownShift(alt::IVehicle* vehicle, float value);
 EXPORT_CLIENT float Vehicle_Handling_GetInitialDriveForce(alt::IVehicle* vehicle);
 EXPORT_CLIENT void Vehicle_Handling_SetInitialDriveForce(alt::IVehicle* vehicle, float value);
-EXPORT_CLIENT float Vehicle_Handling_GetDriveMaxFlatVel(alt::IVehicle* vehicle);
-EXPORT_CLIENT void Vehicle_Handling_SetDriveMaxFlatVel(alt::IVehicle* vehicle, float value);
+
+EXPORT_CLIENT float Vehicle_Handling_GetInitialDriveMaxVel(alt::IVehicle* vehicle);
+EXPORT_CLIENT void Vehicle_Handling_SetInitialDriveMaxVel(alt::IVehicle* vehicle, float value);
+
 EXPORT_CLIENT float Vehicle_Handling_GetInitialDriveMaxFlatVel(alt::IVehicle* vehicle);
 EXPORT_CLIENT void Vehicle_Handling_SetInitialDriveMaxFlatVel(alt::IVehicle* vehicle, float value);
 EXPORT_CLIENT float Vehicle_Handling_GetBrakeForce(alt::IVehicle* vehicle);
@@ -474,4 +476,11 @@ EXPORT_SERVER float Vehicle_GetBrakeLevel(alt::IVehicle* vehicle);
 EXPORT_CLIENT float Vehicle_GetSuspensionHeight(alt::IVehicle* vehicle);
 EXPORT_CLIENT void Vehicle_SetSuspensionHeight(alt::IVehicle* vehicle, float value);
 
+EXPORT_CLIENT void Vehicle_SetupTransmission(alt::IVehicle* vehicle);
+
 EXPORT_SERVER void Vehicle_SetBadge(alt::IVehicle* vehicle, uint32_t textureDictionary, uint32_t texture, vehicleBadgePosition_t vehicleBadgePosition[], uint16_t size);
+
+EXPORT_CLIENT uint8_t Vehicle_GetWheelDynamicFlag(alt::IVehicle* vehicle, uint8_t wheelId, uint32_t flag);
+EXPORT_CLIENT void Vehicle_SetWheelDynamicFlag(alt::IVehicle* vehicle, uint8_t wheelId, uint32_t flag, uint8_t state);
+EXPORT_CLIENT uint8_t Vehicle_GetWheelConfigFlag(alt::IVehicle* vehicle, uint8_t wheelId, uint32_t flag);
+EXPORT_CLIENT void Vehicle_SetWheelConfigFlag(alt::IVehicle* vehicle, uint8_t wheelId, uint32_t flag, uint8_t state);
