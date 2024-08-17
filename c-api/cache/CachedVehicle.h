@@ -152,6 +152,8 @@ namespace cache
     			_wheelTyreRadiuses[i] = base->GetWheelTyreRadius(i);
     			_wheelTyreWidths[i] = base->GetWheelTyreWidth(i);
     			_wheelSurfaceMaterials[i] = base->GetWheelSurfaceMaterial(i);
+    			_wheelDynamicFlag[i] = base->GetWheelDynamicFlag(i, 0);
+    			_wheelConfigFlag[i] = base->GetWheelConfigFlag(i, 0);
 #elif ALT_SERVER_API
     			_wheelBurst[i] = base->IsWheelBurst(i);
     			_wheelHasTire[i] = base->DoesWheelHasTire(i);
@@ -405,7 +407,7 @@ namespace cache
 			return _wheelsCount;
 		}
 
-    	uint8_t _steeringAngle;
+    	float _steeringAngle;
         float GetSteeringAngle() const override
         {
         	return _steeringAngle;
@@ -950,9 +952,23 @@ namespace cache
         {
 	        return _suspensionHeight;
         }
-        void SetSuspensionHeight(float value) override {}
 
+        void SetSuspensionHeight(float value) override {}
         void SetSteeringAngle(float value) override {}
+
+    	std::vector<bool> _wheelDynamicFlag;
+    	bool GetWheelDynamicFlag(uint8_t wheel, uint32_t flag)  const override {
+    		return _wheelDynamicFlag.size() <= wheel ? 0 : _wheelDynamicFlag[wheel];
+    	}
+        void SetWheelDynamicFlag(uint8_t wheel, uint32_t flag, bool state) override {}
+
+    	std::vector<bool> _wheelConfigFlag;
+    	bool GetWheelConfigFlag(uint8_t wheel, uint32_t flag)  const override {
+    		return _wheelConfigFlag.size() <= wheel ? 0 : _wheelConfigFlag[wheel];
+    	}
+        void SetWheelConfigFlag(uint8_t wheel, uint32_t flag, bool state) override {}
+
+        void SetupTransmission() override {}
 #endif
 
     };

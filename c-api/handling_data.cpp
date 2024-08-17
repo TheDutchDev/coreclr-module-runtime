@@ -116,14 +116,14 @@ void Handling_SetDriveBiasFront(uint32_t modelHash, float value) {
     handling->SetDriveBiasFront(value);
 }
 
-float Handling_GetAcceleration(uint32_t modelHash) {
+float Handling_GetDriveBiasRear(uint32_t modelHash) {
     auto handling = alt::ICore::Instance().GetHandlingData(modelHash);
-    return handling->GetAcceleration();
+    return handling->GetDriveBiasRear();
 }
 
-void Handling_SetAcceleration(uint32_t modelHash, float value) {
+void Handling_SetDriveBiasRear(uint32_t modelHash, float value) {
     auto handling = alt::ICore::Instance().GetHandlingData(modelHash);
-    handling->SetAcceleration(value);
+    handling->SetDriveBiasRear(value);
 }
 
 uint32_t Handling_GetInitialDriveGears(uint32_t modelHash) {
@@ -176,14 +176,14 @@ void Handling_SetInitialDriveForce(uint32_t modelHash, float value) {
     handling->SetInitialDriveForce(value);
 }
 
-float Handling_GetDriveMaxFlatVel(uint32_t modelHash) {
+float Handling_GetInitialDriveMaxVel(uint32_t modelHash) {
     auto handling = alt::ICore::Instance().GetHandlingData(modelHash);
-    return handling->GetDriveMaxFlatVel();
+    return handling->GetInitialDriveMaxVel();
 }
 
-void Handling_SetDriveMaxFlatVel(uint32_t modelHash, float value) {
+void Handling_SetInitialDriveMaxVel(uint32_t modelHash, float value) {
     auto handling = alt::ICore::Instance().GetHandlingData(modelHash);
-    handling->SetDriveMaxFlatVel(value);
+    handling->SetInitialDriveMaxVel(value);
 }
 
 float Handling_GetInitialDriveMaxFlatVel(uint32_t modelHash) {
