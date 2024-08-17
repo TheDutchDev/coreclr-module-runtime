@@ -818,13 +818,13 @@ void Core_GetEntitiesInRange(alt::ICore* core, vector3_t position, int32_t range
     entities = entityArr;
 }
 
-void Core_GetClosestEntities(alt::ICore* core, vector3_t position, int32_t range, int32_t dimension, int32_t limit, uint64_t allowedTypes, void**& entities, uint8_t types[], uint64_t size) {
+void Core_GetClosestEntities(alt::ICore* core, vector3_t position, int32_t range, int32_t dimension, int32_t limit, uint64_t allowedTypes, uint8_t order, void**& entities, uint8_t types[], uint64_t size) {
     alt::Position pos;
     pos.x = position.x;
     pos.y = position.y;
     pos.z = position.z;
 
-    auto entitiesArray = core->GetClosestEntities(pos, range, dimension, limit, allowedTypes);
+    auto entitiesArray = core->GetClosestEntities(pos, range, dimension, limit, allowedTypes, static_cast<alt::common::Order>(order));
     if (entitiesArray.size() < size) {
         size = entitiesArray.size();
     }
