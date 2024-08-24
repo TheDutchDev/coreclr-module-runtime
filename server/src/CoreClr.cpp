@@ -63,7 +63,7 @@ CoreClr::CoreClr(alt::ICore* core)
 #else
     _coreClrLib = dlopen(std::string(buffer).c_str(), RTLD_NOW | RTLD_LOCAL);
     if (_coreClrLib == nullptr) {
-        core->LogInfo(std::string("coreclr-module: Unable to find CoreCLR dll [") + std::string(buffer) + "]: " + dlerror());
+        core->LogInfo(cs::Log::LOG_PREFIX, std::string("coreclr-module: Unable to find CoreCLR dll [") + std::string(buffer) + "]: " + dlerror());
         return;
     }
     _initializeFxr = (hostfxr_initialize_for_runtime_config_fn) dlsym(_coreClrLib,
@@ -139,7 +139,7 @@ CoreClr::CoreClr(alt::ICore* core)
     strcat(fullPath, fileName);
     _coreClrLib = dlopen(fullPath, RTLD_NOW | RTLD_LOCAL);
     if (_coreClrLib == nullptr) {
-        core->LogInfo(std::string("coreclr-module: Unable to find CoreCLR dll [") + fullPath + "]: " + dlerror());
+        core->LogInfo(cs::Log::LOG_PREFIX, std::string("coreclr-module: Unable to find CoreCLR dll [") + fullPath + "]: " + dlerror());
         return;
     }
     _initializeFxr = (hostfxr_initialize_for_runtime_config_fn) dlsym(_coreClrLib,
@@ -181,7 +181,7 @@ CoreClr::~CoreClr()
 /*bool CoreClr::GetDelegate(alt::ICore* core, void* runtimeHost, unsigned int domainId, const char* moduleName,
                           const char* classPath, const char* methodName, void** callback) {
     if (runtimeHost == nullptr || domainId == 0) {
-        server->LogInfo(std::string("coreclr-module: Core CLR host not loaded"));
+        server->LogInfo(cs::Log::LOG_PREFIX, std::string("coreclr-module: Core CLR host not loaded"));
         return false;
     }
     int result = _createDelegate(runtimeHost, domainId, moduleName, classPath, methodName, callback);
@@ -189,7 +189,7 @@ CoreClr::~CoreClr()
         if (this->PrintError(server, result)) {
             return false;
         }
-        server->LogInfo(
+        server->LogInfo(cs::Log::LOG_PREFIX,
                 std::string("coreclr-module: Unable to get ") + moduleName + ":" + classPath + "." + methodName +
                 " domain:" +
                 domainId);
@@ -208,10 +208,10 @@ CoreClr::~CoreClr()
     for (auto path : directories) {
         auto directory = opendir(path);
         if (directory == nullptr) {
-            server->LogInfo(std::string("coreclr-module: Runtime directory not found"));
+            server->LogInfo(cs::Log::LOG_PREFIX, std::string("coreclr-module: Runtime directory not found"));
             return assemblies;
         }
-        server->LogInfo(std::string("coreclr-module: Runtime directory found"));
+        server->LogInfo(cs::Log::LOG_PREFIX, std::string("coreclr-module: Runtime directory found"));
         struct dirent* entry;
         struct stat sb{};
         for (auto ext : tpaExtensions) {
@@ -248,7 +248,7 @@ CoreClr::~CoreClr()
 
                 // Check if the extension matches the one we are looking for
                 size_t extPos = strlen(entry->d_name) - extLength;
-                //server->LogInfo(std::string(ext) + "," + extLength + "," + entry->d_name);
+                //server->LogInfo(cs::Log::LOG_PREFIX, std::string(ext) + "," + extLength + "," + entry->d_name);
                 if (extPos <= 0 || memcmp(ext, entry->d_name + extPos, extLength) != 0) {
                     continue;
                 }
@@ -315,7 +315,7 @@ CoreClr::~CoreClr()
             domainId);
 
     if (result < 0) {
-        server->LogInfo(std::string("coreclr-module: Unable to create app domain: 0x"));
+        server->LogInfo(cs::Log::LOG_PREFIX, std::string("coreclr-module: Unable to create app domain: 0x"));
         this->PrintError(server, result);
     } else {
         server->LogInfo(std::string("coreclr-module: Created app domain: 0x") + appPath);
