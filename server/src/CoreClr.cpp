@@ -40,7 +40,7 @@ CoreClr::CoreClr(alt::ICore* core)
     int rc = get_hostfxr_path(buffer, &buffer_size, nullptr);
     if (rc != 0)
     {
-        core->LogError("invalid get_hostfxr_path " + std::to_string(rc));
+        core->LogError(cs::Log::LOG_PREFIX, "invalid get_hostfxr_path " + std::to_string(rc));
     }
     else
     {
@@ -49,7 +49,7 @@ CoreClr::CoreClr(alt::ICore* core)
         _coreClrLib = LoadLibraryEx(std::string(bufferWString.begin(), bufferWString.end()).c_str(), nullptr, 0);
         if (_coreClrLib == nullptr)
         {
-            core->LogInfo(std::string("coreclr-module: Unable to find CoreCLR dll"));
+            core->LogInfo(cs::Log::LOG_PREFIX, std::string("coreclr-module: Unable to find CoreCLR dll"));
             return;
         }
 
@@ -77,7 +77,7 @@ CoreClr::CoreClr(alt::ICore* core)
         if (_initializeFxr == nullptr || _getDelegate == nullptr || _closeFxr == nullptr || _runApp == nullptr ||
             _initForCmd == nullptr)
         {
-            core->LogInfo(std::string("coreclr-module: Unable to find CoreCLR dll methods"));
+            core->LogInfo(cs::Log::LOG_PREFIX, std::string("coreclr-module: Unable to find CoreCLR dll methods"));
             return;
         }
         return;
@@ -121,7 +121,7 @@ CoreClr::CoreClr(alt::ICore* core)
     delete[] fullPath;
     if (_coreClrLib == nullptr)
     {
-        core->LogInfo(std::string("coreclr-module: Unable to find CoreCLR dll"));
+        core->LogInfo(cs::Log::LOG_PREFIX, std::string("coreclr-module: Unable to find CoreCLR dll"));
         return;
     }
 
@@ -153,7 +153,7 @@ CoreClr::CoreClr(alt::ICore* core)
     if (_initializeFxr == nullptr || _getDelegate == nullptr || _closeFxr == nullptr || _runApp == nullptr ||
         _initForCmd == nullptr)
     {
-        core->LogInfo(std::string("coreclr-module: Unable to find CoreCLR dll methods"));
+        core->LogInfo(cs::Log::LOG_PREFIX, std::string("coreclr-module: Unable to find CoreCLR dll methods"));
         return;
     }
 }
@@ -402,7 +402,7 @@ void CoreClr::GetPath(alt::ICore* core, const char* defaultPath)
     auto directory = opendir(defaultPath);
     if (directory == nullptr)
     {
-        core->LogInfo(std::string("coreclr-module: dotnet core sdk not found in ") + defaultPath);
+        core->LogInfo(cs::Log::LOG_PREFIX, std::string("coreclr-module: dotnet core sdk not found in ") + defaultPath);
         return;
     }
     struct dirent* entry;
@@ -413,12 +413,12 @@ void CoreClr::GetPath(alt::ICore* core, const char* defaultPath)
     {
         if (entry->d_type == DT_DIR && memcmp(entry->d_name, ".", 1) != 0 && memcmp(entry->d_name, "..", 2) != 0)
         {
-            core->LogInfo(std::string("coreclr-module: version found: ") + entry->d_name);
+            core->LogInfo(cs::Log::LOG_PREFIX, std::string("coreclr-module: version found: ") + entry->d_name);
             if (greatest == nullptr)
             {
                 if (semver_parse(entry->d_name, &greatest_version))
                 {
-                    core->LogInfo(std::string("coreclr-module: invalid version found: ") + entry->d_name);
+                    core->LogInfo(cs::Log::LOG_PREFIX, std::string("coreclr-module: invalid version found: ") + entry->d_name);
                     continue;
                 }
                 greatest = entry->d_name;
@@ -426,7 +426,7 @@ void CoreClr::GetPath(alt::ICore* core, const char* defaultPath)
             }
             if (semver_parse(entry->d_name, &compare_version))
             {
-                core->LogInfo(std::string("coreclr-module: invalid version found: ") + entry->d_name);
+                core->LogInfo(cs::Log::LOG_PREFIX, std::string("coreclr-module: invalid version found: ") + entry->d_name);
                 continue;
             }
             if (semver_compare(compare_version, greatest_version) > 0)
@@ -452,14 +452,14 @@ void CoreClr::GetPath(alt::ICore* core, const char* defaultPath)
     }
     if (greatest == nullptr)
     {
-        core->LogInfo(std::string("coreclr-module: No dotnet sdk version found"));
+        core->LogInfo(cs::Log::LOG_PREFIX, std::string("coreclr-module: No dotnet sdk version found"));
         return;
     }
     else
     {
         semver_free(&greatest_version);
     }
-    core->LogInfo(std::string("coreclr-module: greatest version: ") + greatest);
+    core->LogInfo(cs::Log::LOG_PREFIX, std::string("coreclr-module: greatest version: ") + greatest);
     size_t size = strlen(defaultPath) + strlen(greatest) + 1;
     runtimeDirectory = (char*)malloc(size);
     memset(runtimeDirectory, '\0', size);
@@ -520,7 +520,7 @@ void thread_proc(struct thread_user_data* userData)
         userData->closeFxr(userData->cxt);
         std::stringstream stream;
         stream << "Run App failed: " << std::hex << std::showbase << rc;
-        alt::ICore::Instance().LogError(stream.str());
+        alt::ICore::Instance().LogError(cs::Log::LOG_PREFIX, stream.str());
     }
     delete userData;
 }
@@ -529,13 +529,13 @@ void CoreClr::GenerateRuntimeConfigText(std::ofstream* outfile)
 {
     if (version == nullptr)
     {
-        core->LogError("Unknown coreclr version");
+        core->LogError(cs::Log::LOG_PREFIX, "Unknown coreclr version");
         return;
     }
     semver_t sem_ver;
     if (semver_parse_version(version, &sem_ver) != 0)
     {
-        core->LogError("Couldn't parse coreclr version");
+        core->LogError(cs::Log::LOG_PREFIX, "Couldn't parse coreclr version");
         return;
     }
     auto minor_version = std::to_string(sem_ver.major) + std::string(".") + std::to_string(sem_ver.minor);
@@ -592,12 +592,12 @@ void CoreClr::CreateManagedHost()
     {
         if (rc == 0x80008094)
         {
-            core->LogError(
+            core->LogError(cs::Log::LOG_PREFIX,
                 "Make sure you have AltV.Net.Host.dll and AltV.Net.Host.runtimeconfig.json in the folder of the altv-server executable or binary.");
         }
         std::stringstream stream;
         stream << "Init for cmd failed: " << std::hex << std::showbase << rc;
-        core->LogError(stream.str());
+        core->LogError(cs::Log::LOG_PREFIX, stream.str());
         _closeFxr(cxt);
         if (result)
         {
@@ -626,7 +626,7 @@ bool CoreClr::ExecuteManagedResource(const char* resourcePath, const char* resou
     while (hostResourceExecute == nullptr) { cv.wait(lck); }
     if (hostResourceExecute == nullptr)
     {
-        core->LogInfo(std::string("coreclr-module: Core CLR host not loaded"));
+        core->LogInfo(cs::Log::LOG_PREFIX, std::string("coreclr-module: Core CLR host not loaded"));
         return false;
     }
 
@@ -663,7 +663,7 @@ bool CoreClr::ExecuteManagedResourceUnload(const char* resourcePath, const char*
     while (hostResourceExecuteUnload == nullptr) { cv.wait(lck); }
     if (hostResourceExecuteUnload == nullptr)
     {
-        core->LogInfo(std::string("coreclr-module: Core CLR host not loaded"));
+        core->LogInfo(cs::Log::LOG_PREFIX, std::string("coreclr-module: Core CLR host not loaded"));
         return false;
     }
 
