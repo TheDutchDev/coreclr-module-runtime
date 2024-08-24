@@ -5,7 +5,7 @@
 #ifdef ALTV_CSHARP_SHARED
 #include "cpp-sdk/version/version.h"
 #endif
-#include <Log.h>
+#include <../../c-api/Log.h>
 
 using namespace alt;
 

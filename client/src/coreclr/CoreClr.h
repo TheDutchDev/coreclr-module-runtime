@@ -5,7 +5,7 @@
 #include "cpp-sdk/ICore.h"
 #include <coreclr.h>
 #include <filesystem>
-#include <Log.h>
+#include <../../c-api/Log.h>
 #include <optional>
 
 #include "nuget/NuGet.h"
@@ -20,12 +20,12 @@ struct Progress
     float total;
     float current;
     progressfn_t& updateFn;
-    
+
     void Update() const
     {
         updateFn(state, current, total, 1000);
     }
-    
+
     void Advance(float value)
     {
         current += value;
@@ -63,7 +63,7 @@ private:
     coreclr_shutdown_2_ptr _shutdownCoreClr = nullptr;
     coreclr_create_delegate_ptr _createDelegate = nullptr;
     coreclr_execute_assembly_ptr _executeAssembly = nullptr;
-    
+
     void* _runtimeHost = nullptr;
     unsigned int _domainId = 0;
     std::optional<NuGet> _nuget;
@@ -78,9 +78,9 @@ private:
     void DownloadHost(alt::IHttpClient* httpClient, Progress& progress) const;
     void DownloadNuGet(alt::IHttpClient* httpClient, nlohmann::json json, Progress& progress);
     void DownloadNuGets(alt::IHttpClient* httpClient, progressfn_t& progress);
-    
+
     void InitializeCoreclr();
     void Update(progressfn_t progressFn, int attempt);
-    
+
     std::string GetBaseCdnUrl() const;
 };

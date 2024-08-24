@@ -5,7 +5,7 @@
 #include "../../c-api/data/types.h"
 #include "../../c-api/data/function_table.h"
 #include "../../c-api/client.h"
-#include "Log.h"
+#include "../../c-api/Log.h"
 #include <cstring>
 #include <type_traits>
 #include <stdlib.h>

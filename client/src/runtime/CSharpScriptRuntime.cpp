@@ -1,4 +1,4 @@
-#include <Log.h>
+#include <../../c-api/Log.h>
 #include "CSharpScriptRuntime.h"
 #include "CSharpResourceImpl.h"
 #include "natives.h"
