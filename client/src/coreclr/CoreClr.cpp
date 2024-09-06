@@ -6,12 +6,12 @@
 #include <sstream>
 #include <filesystem>
 #include <fstream>
-#include <Log.h>
 #include <zip_file.hpp>
 
 #include "utils.h"
 #include "../../c-api/client.h"
 #include "../../c-api/func_table.h"
+#include "../../c-api/Log.h"
 
 using namespace alt;
 using namespace std;

@@ -3,7 +3,7 @@
 #include <vector>
 #include "CSharpScriptRuntime.h"
 #include "CSharpResourceImpl.h"
-#include <Log.h>
+#include <../../c-api/Log.h>
 #include "CRC.h"
 #include <sstream>
 #include <string>
