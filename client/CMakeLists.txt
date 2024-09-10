@@ -25,6 +25,13 @@ set(CSHARP_MODULE_DEFS
 #   -DDEBUG_CLIENT
 )
 
+# cpp-sdk
+if(NOT ALTV_CSHARP_CPP_SDK)
+  set(ALTV_CSHARP_CPP_SDK ../)
+else()
+  set(ALTV_CSHARP_DEINIT_CPPSDK 1)
+endif()
+
 file(GLOB_RECURSE PROJECT_SOURCE_FILES "src/*.h" "src/*.cpp")
 file(GLOB_RECURSE CAPI_FILES "../c-api/*.h" "../c-api/*.cpp")
 
@@ -32,22 +39,41 @@ if(WIN32 AND (MSVC OR CMAKE_CXX_COMPILER_ID MATCHES "Clang"))
     add_definitions(/MP)
 endif()
 
-if(DYNAMIC_BUILD)
-    set(SDK_PROJECT_NAME csharp-alt-sdk)
-    include(../cpp-sdk/CMakeLists.txt)
+set(SDK_PROJECT_NAME alt-sdk-csharp)
+if(NOT TARGET ${SDK_PROJECT_NAME})
+    include(${ALTV_CSHARP_CPP_SDK}/cpp-sdk/CMakeLists.txt)
+endif()
 
+if(DYNAMIC_BUILD)
     add_library(${TARGET_NAME} SHARED "${PROJECT_SOURCE_FILES}" "${CAPI_FILES}")
     target_compile_definitions(${PROJECT_NAME} PRIVATE
         ${CSHARP_MODULE_DEFS}
         -DALTV_CSHARP_SHARED
     )
     include_directories(${TARGET_NAME} PRIVATE "src" "thirdparty" "..")
-    add_dependencies(${TARGET_NAME} csharp-alt-sdk)
 else()
     add_library(${TARGET_NAME}-static STATIC "${PROJECT_SOURCE_FILES}" "${CAPI_FILES}")
     target_compile_definitions(${PROJECT_NAME}-static PRIVATE
         ${CSHARP_MODULE_DEFS}
     )
     include_directories(${TARGET_NAME}-static PRIVATE "src" "thirdparty" ${ALTV_CSHARP_CPP_SDK})
-    # add_dependencies(${TARGET_NAME}-static csharp-alt-sdk)
+endif()
+
+
+if(ALTV_CSHARP_DEINIT_CPPSDK)
+  if(CMAKE_HOST_WIN32)
+      add_custom_command(TARGET ${PROJECT_NAME}-static
+        PRE_BUILD
+        COMMAND cmd /C "tools\\deinit-cppsdk.bat"
+        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+      )
+  else()
+      if(EXISTS "../cpp-sdk/SDK.h")
+          add_custom_command(TARGET ${PROJECT_NAME}-static
+            PRE_BUILD
+            COMMAND "git submodule deinit -f ../cpp-sdk"
+            WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+          )
+      endif()
+  endif()
 endif()
