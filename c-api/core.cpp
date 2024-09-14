@@ -12,23 +12,23 @@
 CAPI_START()
 
 void Core_LogInfo(alt::ICore* core, const char* str) {
-    core->LogInfo(str);
+    core->LogInfo(cs::Log::LOG_PREFIX, str);
 }
 
 void Core_LogDebug(alt::ICore* core, const char* str) {
-    core->LogDebug(str);
+    core->LogDebug(cs::Log::LOG_PREFIX, str);
 }
 
 void Core_LogWarning(alt::ICore* core, const char* str) {
-    core->LogWarning(str);
+    core->LogWarning(cs::Log::LOG_PREFIX, str);
 }
 
 void Core_LogError(alt::ICore* core, const char* str) {
-    core->LogError(str);
+    core->LogError(cs::Log::LOG_PREFIX, str);
 }
 
 void Core_LogColored(alt::ICore* core, const char* str) {
-    core->LogColored(str);
+    core->LogColored(cs::Log::LOG_PREFIX, str);
 }
 
 alt::MValueConst* Core_CreateMValueNil(alt::ICore* core) {
@@ -1218,7 +1218,7 @@ void Core_TriggerServerEventUnreliable(alt::ICore* core, const char* event, alt:
 void Core_ShowCursor(alt::ICore* core, alt::IResource* resource, uint8_t state) {
     if(!resource->ToggleCursor(state))
     {
-        core->LogWarning("Cursor state can't go < 0");
+        core->LogWarning(cs::Log::LOG_PREFIX, "Cursor state can't go < 0");
     }
 }
 

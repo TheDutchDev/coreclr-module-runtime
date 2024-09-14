@@ -13,6 +13,7 @@
 #include "data/ped_model_info.h"
 #include "data/weapon_model_info.h"
 #include "utils/export.h"
+#include "Log.h"
 
 #ifdef ALT_SERVER_API
 #include <CSharpResourceImpl.h>

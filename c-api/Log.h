@@ -23,6 +23,8 @@ class Log
     Log() = default;
 
 public:
+    static constexpr const char* LOG_PREFIX = "[C#]";
+
     Log(const Log&) = delete;
     Log(Log&&) = delete;
     Log& operator=(const Log&) = delete;
@@ -104,11 +106,11 @@ public:
     {
         switch(log.type)
         {
-            case INFO: alt::ICore::Instance().LogInfo(log.buf.str()); break;
-            case DEBUG: alt::ICore::Instance().LogDebug(log.buf.str().c_str()); break;
-            case WARNING: alt::ICore::Instance().LogWarning(log.buf.str().c_str()); break;
-            case ERR: alt::ICore::Instance().LogError(log.buf.str().c_str()); break;
-            case COLORED: alt::ICore::Instance().LogColored(log.buf.str().c_str()); break;
+            case INFO: alt::ICore::Instance().LogInfo(LOG_PREFIX, log.buf.str()); break;
+            case DEBUG: alt::ICore::Instance().LogDebug(LOG_PREFIX, log.buf.str().c_str()); break;
+            case WARNING: alt::ICore::Instance().LogWarning(LOG_PREFIX, log.buf.str().c_str()); break;
+            case ERR: alt::ICore::Instance().LogError(LOG_PREFIX, log.buf.str().c_str()); break;
+            case COLORED: alt::ICore::Instance().LogColored(LOG_PREFIX, log.buf.str().c_str()); break;
         }
 
         log.buf.str("");

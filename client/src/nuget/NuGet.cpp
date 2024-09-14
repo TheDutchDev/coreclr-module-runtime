@@ -1,6 +1,6 @@
 ﻿#include "NuGet.h"
 
-#include <Log.h>
+#include <../../c-api/Log.h>
 
 #include "utils.h"
 
