@@ -51,6 +51,7 @@ if(DYNAMIC_BUILD)
         -DALTV_CSHARP_SHARED
     )
     include_directories(${TARGET_NAME} PRIVATE "src" "thirdparty" "..")
+    add_dependencies(${TARGET_NAME} alt-sdk-csharp)
 else()
     add_library(${TARGET_NAME}-static STATIC "${PROJECT_SOURCE_FILES}" "${CAPI_FILES}")
     target_compile_definitions(${PROJECT_NAME}-static PRIVATE
