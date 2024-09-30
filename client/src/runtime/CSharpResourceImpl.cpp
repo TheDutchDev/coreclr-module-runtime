@@ -696,12 +696,6 @@ void CSharpResourceImpl::OnCreateBaseObject(alt::IBaseObject* object)
             OnCreateBaseObjectDelegate(audioFilter, audioFilter->GetType(), audioFilter->GetID());
             break;
         }
-    case alt::IBaseObject::Type::RML_ELEMENT:
-        {
-            auto rmlElement = dynamic_cast<alt::IRmlElement*>(object);
-            OnCreateBaseObjectDelegate(rmlElement, rmlElement->GetType(), rmlElement->GetID());
-            break;
-        }
     case alt::IBaseObject::Type::RML_DOCUMENT:
         {
             auto rmlDocument = dynamic_cast<alt::IRmlDocument*>(object);
