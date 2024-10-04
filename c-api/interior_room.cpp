@@ -7,6 +7,12 @@
 CAPI_START()
 
 #ifdef ALT_CLIENT_API
+uint32_t InteriorRoom_GetIndex(uint32_t interiorId, uint32_t roomValue, uint8_t isIndex)
+{
+	auto room = GetInteriorRoom(interiorId, roomValue, isIndex);
+	return room->GetIndex();
+}
+
 const char* InteriorRoom_GetName(uint32_t interiorId, uint32_t roomValue, uint8_t isIndex, int32_t& size)
 {
 	auto room = GetInteriorRoom(interiorId, roomValue, isIndex);
@@ -52,7 +58,7 @@ void InteriorRoom_SetTimecycle(uint32_t interiorId, uint32_t roomValue, uint8_t 
 	room->SetTimecycle(timecycle);
 }
 
-void InteriorRoom_SetEntitiesExtents(uint32_t interiorId, uint32_t roomValue, uint8_t isIndex, position_t min,
+void InteriorRoom_SetExtents(uint32_t interiorId, uint32_t roomValue, uint8_t isIndex, position_t min,
 	position_t max)
 {
 	auto room = GetInteriorRoom(interiorId, roomValue, isIndex);

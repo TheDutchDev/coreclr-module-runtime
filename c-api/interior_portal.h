@@ -22,6 +22,7 @@
 #pragma clang diagnostic pop
 #endif
 
+EXPORT_CLIENT uint32_t InteriorPortal_GetIndex(uint32_t interiorId, uint32_t portalIndex);
 EXPORT_CLIENT uint16_t InteriorPortal_GetCornerCount(uint32_t interiorId, uint32_t portalIndex);
 EXPORT_CLIENT alt::Position InteriorPortal_GetCornerPosition(uint32_t interiorId, uint32_t portalIndex, uint32_t cornerIndex);
 EXPORT_CLIENT uint32_t InteriorPortal_GetRoomFrom(uint32_t interiorId, uint32_t portalIndex);

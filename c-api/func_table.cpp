@@ -1,6 +1,6 @@
 #include "func_table.h"
 
-inline uint64_t capiHash = 5316421578343678696UL;
+inline uint64_t capiHash = 10340967010520350397UL;
 inline uint64_t capiHashes[] = {
     0,
     #ifdef ALT_CLIENT_API
@@ -482,6 +482,7 @@ inline uint64_t capiHashes[] = {
     7285942813518470950UL,
     1117662078157381260UL,
     9560528769032004812UL,
+    13206342625351776081UL,
     14268893542560810008UL,
     3255950788253963043UL,
     16182899257589323539UL,
@@ -491,10 +492,11 @@ inline uint64_t capiHashes[] = {
     16837975631170049766UL,
     17030953846480430905UL,
     7856663484428066825UL,
+    15158102510225914020UL,
     4739364089865431579UL,
     4358271132564072471UL,
     7499702612373464399UL,
-    18153641274402744534UL,
+    12048596999299004349UL,
     4102368831198906004UL,
     7739810354326755506UL,
     12723661681621738686UL,
@@ -2297,6 +2299,7 @@ inline void* capiPointers[] = {
     (void*) InteriorPortal_GetEntityPosition,
     (void*) InteriorPortal_GetEntityRotation,
     (void*) InteriorPortal_GetFlag,
+    (void*) InteriorPortal_GetIndex,
     (void*) InteriorPortal_GetRoomFrom,
     (void*) InteriorPortal_GetRoomTo,
     (void*) InteriorPortal_SetCornerPosition,
@@ -2306,10 +2309,11 @@ inline void* capiPointers[] = {
     (void*) InteriorPortal_SetRoomTo,
     (void*) InteriorRoom_GetExtents,
     (void*) InteriorRoom_GetFlag,
+    (void*) InteriorRoom_GetIndex,
     (void*) InteriorRoom_GetName,
     (void*) InteriorRoom_GetNameHash,
     (void*) InteriorRoom_GetTimecycle,
-    (void*) InteriorRoom_SetEntitiesExtents,
+    (void*) InteriorRoom_SetExtents,
     (void*) InteriorRoom_SetFlag,
     (void*) InteriorRoom_SetTimecycle,
     (void*) LocalObject_ActivatePhysics,

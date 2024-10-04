@@ -22,6 +22,7 @@
 #pragma clang diagnostic pop
 #endif
 
+EXPORT_CLIENT uint32_t InteriorRoom_GetIndex(uint32_t interiorId, uint32_t roomValue, uint8_t isIndex);
 EXPORT_CLIENT const char* InteriorRoom_GetName(uint32_t interiorId, uint32_t roomValue, uint8_t isIndex, int32_t& size);
 EXPORT_CLIENT uint32_t InteriorRoom_GetNameHash(uint32_t interiorId, uint32_t roomValue, uint8_t isIndex);
 EXPORT_CLIENT int32_t InteriorRoom_GetFlag(uint32_t interiorId, uint32_t roomValue, uint8_t isIndex);
@@ -31,7 +32,7 @@ EXPORT_CLIENT void InteriorRoom_GetExtents(uint32_t interiorId, uint32_t roomVal
 
 EXPORT_CLIENT void InteriorRoom_SetFlag(uint32_t interiorId, uint32_t roomValue, uint8_t isIndex, int32_t flag);
 EXPORT_CLIENT void InteriorRoom_SetTimecycle(uint32_t interiorId, uint32_t roomValue, uint8_t isIndex, uint32_t timecycle);
-EXPORT_CLIENT void InteriorRoom_SetEntitiesExtents(uint32_t interiorId, uint32_t roomValue, uint8_t isIndex, position_t min, position_t max);
+EXPORT_CLIENT void InteriorRoom_SetExtents(uint32_t interiorId, uint32_t roomValue, uint8_t isIndex, position_t min, position_t max);
 
 
 #ifdef ALT_CLIENT_API

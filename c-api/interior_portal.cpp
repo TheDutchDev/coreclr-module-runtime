@@ -6,6 +6,11 @@
 CAPI_START()
 
 #ifdef ALT_CLIENT_API
+uint32_t InteriorPortal_GetIndex(uint32_t interiorId, uint32_t portalIndex)
+{
+	auto portal = GetInteriorPortal(interiorId, portalIndex);
+	return portal->GetIndex();
+}
 
 uint16_t InteriorPortal_GetCornerCount(uint32_t interiorId, uint32_t portalIndex)
 {
