@@ -38,7 +38,7 @@ uint32_t InteriorRoom_GetTimecycle(uint32_t interiorId, uint32_t roomValue, uint
 }
 
 void InteriorRoom_GetExtents(uint32_t interiorId, uint32_t roomValue, uint8_t isIndex,
-	interior_extend_info_t& extents)
+	interior_extent_info_t& extents)
 {
 	auto room = GetInteriorRoom(interiorId, roomValue, isIndex);
 	auto ext = room->GetExtents();

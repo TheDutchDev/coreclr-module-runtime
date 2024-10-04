@@ -4,4 +4,4 @@
 typedef struct {
 	alt::Position min;
 	alt::Position max;
-} interior_extend_info_t;
+} interior_extent_info_t;

@@ -7,7 +7,7 @@
 #endif
 
 #include "cpp-sdk/SDK.h"
-#include "data/interior_extend_info.h"
+#include "data/interior_extent_info.h"
 #include "data/types.h"
 #include "data/invoker.h"
 #include "utils/export.h"
@@ -28,7 +28,7 @@ EXPORT_CLIENT uint32_t InteriorRoom_GetNameHash(uint32_t interiorId, uint32_t ro
 EXPORT_CLIENT int32_t InteriorRoom_GetFlag(uint32_t interiorId, uint32_t roomValue, uint8_t isIndex);
 EXPORT_CLIENT uint32_t InteriorRoom_GetTimecycle(uint32_t interiorId, uint32_t roomValue, uint8_t isIndex);
 
-EXPORT_CLIENT void InteriorRoom_GetExtents(uint32_t interiorId, uint32_t roomValue, uint8_t isIndex, interior_extend_info_t& extents);
+EXPORT_CLIENT void InteriorRoom_GetExtents(uint32_t interiorId, uint32_t roomValue, uint8_t isIndex, interior_extent_info_t& extents);
 
 EXPORT_CLIENT void InteriorRoom_SetFlag(uint32_t interiorId, uint32_t roomValue, uint8_t isIndex, int32_t flag);
 EXPORT_CLIENT void InteriorRoom_SetTimecycle(uint32_t interiorId, uint32_t roomValue, uint8_t isIndex, uint32_t timecycle);

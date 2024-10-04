@@ -7,7 +7,7 @@
 #endif
 
 #include "cpp-sdk/SDK.h"
-#include "data/interior_extend_info.h"
+#include "data/interior_extent_info.h"
 #include "data/types.h"
 #include "data/invoker.h"
 #include "utils/export.h"
@@ -26,4 +26,4 @@ EXPORT_CLIENT uint16_t Interior_GetRoomCount(uint32_t interiorId);
 EXPORT_CLIENT uint16_t Interior_GetPortalCount(uint32_t interiorId);
 EXPORT_CLIENT alt::Position Interior_GetPosition(uint32_t interiorId);
 EXPORT_CLIENT alt::Rotation Interior_GetRotation(uint32_t interiorId);
-EXPORT_CLIENT void Interior_GetEntitiesExtents(uint32_t interiorId, interior_extend_info_t& extents);
+EXPORT_CLIENT void Interior_GetEntitiesExtents(uint32_t interiorId, interior_extent_info_t& extents);

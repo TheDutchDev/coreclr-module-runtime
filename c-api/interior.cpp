@@ -29,7 +29,7 @@ alt::Rotation Interior_GetRotation(uint32_t interiorId)
 	return interior->GetRotation();
 }
 
-void Interior_GetEntitiesExtents(uint32_t interiorId, interior_extend_info_t& extents)
+void Interior_GetEntitiesExtents(uint32_t interiorId, interior_extent_info_t& extents)
 {
 	auto interior = alt::ICore::Instance().GetInterior(interiorId);
 	auto ext = interior->GetEntitiesExtents();
