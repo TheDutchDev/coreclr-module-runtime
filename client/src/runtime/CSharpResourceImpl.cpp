@@ -3,7 +3,7 @@
 #include <vector>
 #include "CSharpScriptRuntime.h"
 #include "CSharpResourceImpl.h"
-#include <Log.h>
+#include <../../c-api/Log.h>
 #include "CRC.h"
 #include <sstream>
 #include <string>
@@ -694,12 +694,6 @@ void CSharpResourceImpl::OnCreateBaseObject(alt::IBaseObject* object)
         {
             auto audioFilter = dynamic_cast<alt::IAudioFilter*>(object);
             OnCreateBaseObjectDelegate(audioFilter, audioFilter->GetType(), audioFilter->GetID());
-            break;
-        }
-    case alt::IBaseObject::Type::RML_ELEMENT:
-        {
-            auto rmlElement = dynamic_cast<alt::IRmlElement*>(object);
-            OnCreateBaseObjectDelegate(rmlElement, rmlElement->GetType(), rmlElement->GetID());
             break;
         }
     case alt::IBaseObject::Type::RML_DOCUMENT:

@@ -6,12 +6,12 @@
 #include <sstream>
 #include <filesystem>
 #include <fstream>
-#include <Log.h>
 #include <zip_file.hpp>
 
 #include "utils.h"
 #include "../../c-api/client.h"
 #include "../../c-api/func_table.h"
+#include "../../c-api/Log.h"
 
 using namespace alt;
 using namespace std;
@@ -193,7 +193,7 @@ uint8_t GetCachedAssembly(const char* name, int* bufferSize, void** buffer) {
     auto stream = std::ifstream(path, std::ios::binary);
     miniz_cpp::zip_file zip(stream);
     std::stringstream contentStream;
-    auto fileName = std::string("lib/net6.0/") + name + ".dll";
+    auto fileName = std::string("lib/net8.0/") + name + ".dll";
     if (!zip.has_file(fileName)) {
         cs::Log::Warning << "Nupkg was found, but no dll was found in it " << fileName << cs::Log::Endl;
         zip.printdir();

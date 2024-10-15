@@ -5,7 +5,7 @@
 #include <string>
 #include <codecvt>
 #include <future>
-#include <Log.h>
+#include <../../c-api/Log.h>
 
 EXTERN_C IMAGE_DOS_HEADER __ImageBase;
 
@@ -59,7 +59,7 @@ namespace utils
         std::char_traits<T>::copy(returnStr, str, ulSize);
         return returnStr;
     }
-    
+
     template <typename T, typename... Args>
     T *get_clr_value(Args &&...args)
     {
@@ -99,27 +99,27 @@ namespace utils
         std::transform(str.begin(), str.end(), str.begin(), [](const unsigned char c){ return std::tolower(c); });
         return str;
     }
-    
+
     inline alt::IHttpClient::HttpResponse download_file_sync(alt::IHttpClient* httpClient, const std::string& url) {
         auto attempt = 0;
-        
+
         while (true)
         {
             if (++attempt > 5) throw std::runtime_error("Failed to download file " + url);
-            
+
             std::promise<alt::IHttpClient::HttpResponse> promise;
             std::future<alt::IHttpClient::HttpResponse> future = promise.get_future();
-    
+
             httpClient->Get([](alt::IHttpClient::HttpResponse response, const void* data) {
                 const auto innerPromise = (std::promise<alt::IHttpClient::HttpResponse>*) data;
-            
+
                 if (response.statusCode != 200) {
                     std::stringstream ss;
                     ss << "HTTP " << response.statusCode << " " << response.body;
                     innerPromise->set_exception(std::make_exception_ptr(std::runtime_error(ss.str())));
                     return;
                 }
-            
+
                 innerPromise->set_value(response);
             }, url, &promise);
 
