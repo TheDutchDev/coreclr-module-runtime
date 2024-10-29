@@ -37,6 +37,10 @@ uint64_t ConnectionInfo_GetHwIdExHash(alt::IConnectionInfo* connectionInfo) {
     return connectionInfo->GetHwIdExHash();
 }
 
+std::string ConnectionInfo_GetHwIdProtHash(alt::IConnectionInfo* connectionInfo) {
+    return connectionInfo->GetHwIdProtHash();
+}
+
 const char* ConnectionInfo_GetAuthToken(alt::IConnectionInfo* connectionInfo, int32_t& size) {
     return AllocateString(connectionInfo->GetAuthToken(), size);
 }
