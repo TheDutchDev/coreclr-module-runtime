@@ -77,7 +77,7 @@ EXPORT_SERVER void Player_SetModel(alt::IPlayer* player, uint32_t model);
 EXPORT_SERVER uint64_t Player_GetSocialID(alt::IPlayer* player);
 EXPORT_SERVER uint64_t Player_GetHwidHash(alt::IPlayer* player);
 EXPORT_SERVER uint64_t Player_GetHwidExHash(alt::IPlayer* player);
-EXPORT_SERVER const char* Player_GetHwidProtHash(alt::IPlayer* player);
+EXPORT_SERVER const char* Player_Gethwid3(alt::IPlayer* player);
 EXPORT_SERVER const char* Player_GetAuthToken(alt::IPlayer* player, int32_t& size);
 
 EXPORT_SERVER void Player_SetHealth(alt::IPlayer* player, uint16_t health);
