@@ -57,7 +57,7 @@ namespace cache
 										_socialID(base->GetSocialID()),
 										_hwidHash(base->GetHwidHash()),
 										_hwidExHash(base->GetHwidExHash()),
-										_Hwid3(base->GetHwid3()),
+										_HwId3(base->GetHwId3()),
 										_authToken(base->GetAuthToken()),
 										_discordId(base->GetDiscordId()),
 										_invincible(base->GetInvincible()),
@@ -328,8 +328,8 @@ namespace cache
 			return _hwidExHash;
 		}
 
-        std::string _hwidPtorHash;
-		std::string GetHwid3() const override { return _hwidPtorHash; }
+        std::string _hwId3;
+		std::string GetHwId3() const override { return _hwId3; }
 
         std::string _authToken;
         std::string GetAuthToken() const override {
