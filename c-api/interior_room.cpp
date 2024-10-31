@@ -62,7 +62,7 @@ void InteriorRoom_SetExtents(uint32_t interiorId, uint32_t roomValue, uint8_t is
 	position_t max)
 {
 	auto room = GetInteriorRoom(interiorId, roomValue, isIndex);
-	alt::IInterior::AABB extentInfo;
+	alt::AABB extentInfo;
 	extentInfo.min = alt::Position(min.x, min.y, min.z);
 	extentInfo.max = alt::Position(max.x, max.y, max.z);
 	room->SetExtents(extentInfo);
