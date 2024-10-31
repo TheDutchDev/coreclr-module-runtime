@@ -7,7 +7,7 @@
 #endif
 
 #include "cpp-sdk/SDK.h"
-#include "data/interior_extent_info.h"
+#include "data/aabb.h"
 #include "data/types.h"
 #include "data/invoker.h"
 #include "utils/export.h"

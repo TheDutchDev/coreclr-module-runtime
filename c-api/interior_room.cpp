@@ -38,7 +38,7 @@ uint32_t InteriorRoom_GetTimecycle(uint32_t interiorId, uint32_t roomValue, uint
 }
 
 void InteriorRoom_GetExtents(uint32_t interiorId, uint32_t roomValue, uint8_t isIndex,
-	interior_extent_info_t& extents)
+	aabb_t& extents)
 {
 	auto room = GetInteriorRoom(interiorId, roomValue, isIndex);
 	auto ext = room->GetExtents();
@@ -62,7 +62,7 @@ void InteriorRoom_SetExtents(uint32_t interiorId, uint32_t roomValue, uint8_t is
 	position_t max)
 {
 	auto room = GetInteriorRoom(interiorId, roomValue, isIndex);
-	alt::IInterior::ExtentInfo extentInfo;
+	alt::IInterior::AABB extentInfo;
 	extentInfo.min = alt::Position(min.x, min.y, min.z);
 	extentInfo.max = alt::Position(max.x, max.y, max.z);
 	room->SetExtents(extentInfo);
