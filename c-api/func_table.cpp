@@ -1,6 +1,6 @@
 #include "func_table.h"
 
-inline uint64_t capiHash = 11629663074568386340UL;
+inline uint64_t capiHash = 17036908327259488488UL;
 inline uint64_t capiHashes[] = {
     0,
     #ifdef ALT_CLIENT_API
@@ -1336,6 +1336,7 @@ inline uint64_t capiHashes[] = {
     7415605567391116903UL,
     7998061229071288348UL,
     4175744399917476392UL,
+    11277934694982627403UL,
     3151831504154255688UL,
     11409383581668438027UL,
     8080268107975854795UL,
@@ -1495,6 +1496,7 @@ inline uint64_t capiHashes[] = {
     12996031514192232278UL,
     6875264309357036667UL,
     18242810182906526031UL,
+    12439246743379924111UL,
     424368865670330442UL,
     9546723288515311389UL,
     16961931856292652951UL,
@@ -3123,8 +3125,8 @@ inline void* capiPointers[] = {
     (void*) ConnectionInfo_GetCloudAuthResult,
     (void*) ConnectionInfo_GetCloudID,
     (void*) ConnectionInfo_GetDiscordUserID,
-    (void*) ConnectionInfo_GetHwIdExHash,
     (void*) ConnectionInfo_GetHwId3,
+    (void*) ConnectionInfo_GetHwIdExHash,
     (void*) ConnectionInfo_GetHwIdHash,
     (void*) ConnectionInfo_GetID,
     (void*) ConnectionInfo_GetIp,
@@ -3283,8 +3285,8 @@ inline void* capiPointers[] = {
     (void*) Player_GetHeadBlendData,
     (void*) Player_GetHeadBlendPaletteColor,
     (void*) Player_GetHeadOverlay,
-    (void*) Player_GetHwidExHash,
     (void*) Player_GetHwId3,
+    (void*) Player_GetHwidExHash,
     (void*) Player_GetHwidHash,
     (void*) Player_GetInteriorLocation,
     (void*) Player_GetInvincible,

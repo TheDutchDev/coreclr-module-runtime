@@ -246,8 +246,8 @@ uint64_t Player_GetHwidExHash(alt::IPlayer* player) {
     return player->GetHwidExHash();
 }
 
-std::string Player_GetHwId3(alt::IPlayer* player) {
-    return player->GetHwId3();
+const char* Player_GetHwId3(alt::IPlayer* player, int32_t& size) {
+    return AllocateString(player->GetHwId3(), size);
 }
 
 const char* Player_GetAuthToken(alt::IPlayer* player, int32_t& size) {
