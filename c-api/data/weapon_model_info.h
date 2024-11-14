@@ -15,6 +15,7 @@ struct ClrWeaponModelInfo {
     int32_t skillAbove50MaxAmmoMp = 0;
     int32_t maxSkillMaxAmmoMp = 0;
     int32_t bonusMaxAmmoMp = 0;
+    char* damageType = nullptr;
 
     ClrWeaponModelInfo() = default;
     ClrWeaponModelInfo(alt::WeaponModelInfo info) :
@@ -42,6 +43,10 @@ struct ClrWeaponModelInfo {
         ammoModelName = new char[info.ammoModelName.length() + 1];
         std::copy(info.ammoModelName.begin(), info.ammoModelName.end(), ammoModelName);
         ammoModelName[info.ammoModelName.length()] = '\0';
+
+        damageType = new char[info.damageType.length() + 1];
+        std::copy(info.damageType.begin(), info.damageType.end(), damageType);
+        damageType[info.damageType.length()] = '\0';
     }
 
     ~ClrWeaponModelInfo() {
@@ -49,5 +54,6 @@ struct ClrWeaponModelInfo {
         delete[] ammoType;
         delete[] modelName;
         delete[] ammoModelName;
+        delete[] damageType;
     }
 };
