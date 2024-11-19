@@ -53,6 +53,9 @@
 #include "entities/local_ped.h"
 #include "entities/font.h"
 #include "entities/custom_texture.h"
+#include "interior.h"
+#include "interior_portal.h"
+#include "interior_room.h"
 #include <type_traits>
 
 const function_table_t* get_func_table();
