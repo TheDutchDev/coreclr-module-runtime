@@ -16,15 +16,15 @@ struct ClrDiscordUser {
 
         auto usernameStr = discordManager->GetUsername();
         username = new char[usernameStr.length() + 1];
-        strcpy(username, usernameStr.c_str());
+        strcpy_s(username, usernameStr.length() + 1, usernameStr.c_str());
 
         auto discriminatorStr = discordManager->GetDiscriminator();
         discriminator = new char[discriminatorStr.length() + 1];
-        strcpy(discriminator, discriminatorStr.c_str());
+        strcpy_s(discriminator, discriminatorStr.length() + 1, discriminatorStr.c_str());
 
         auto avatarStr = discordManager->GetAvatar();
         avatar = new char[avatarStr.length() + 1];
-        strcpy(avatar, avatarStr.c_str());
+        strcpy_s(avatar, avatarStr.length() + 1,avatarStr.c_str());
     }
 
     ~ClrDiscordUser() {

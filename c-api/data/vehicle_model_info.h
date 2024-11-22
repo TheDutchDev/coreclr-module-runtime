@@ -54,7 +54,7 @@ struct ClrVehicleModelInfo
         }
 
         title = new char[info.title.length() + 1];
-        strcpy(title, info.title.c_str());
+        strcpy_s(title, info.title.length() + 1, info.title.c_str());
 
         const auto vehModelBones = info.bones;
         boneSize = vehModelBones.size();
