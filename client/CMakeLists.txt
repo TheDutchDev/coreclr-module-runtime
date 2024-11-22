@@ -35,7 +35,7 @@ endif()
 file(GLOB_RECURSE PROJECT_SOURCE_FILES "src/*.h" "src/*.cpp")
 file(GLOB_RECURSE CAPI_FILES "../c-api/*.h" "../c-api/*.cpp")
 
-if(WIN32 AND (MSVC OR CMAKE_CXX_COMPILER_ID MATCHES "Clang"))
+if(MSVC AND NOT (CMAKE_CXX_COMPILER_ID MATCHES "Clang"))
     add_definitions(/MP)
 endif()
 
