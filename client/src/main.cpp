@@ -1,4 +1,3 @@
-#define ALT_CLIENT_API
 #include <exceptions/LoadException.h>
 #include "cpp-sdk/SDK.h"
 #include "runtime/CSharpScriptRuntime.h"
