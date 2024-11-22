@@ -63,7 +63,7 @@ namespace cache
         {
         }
 
-        bool IsRemoved() const
+        bool IsRemoved() const override
         {
             return false;
         }
