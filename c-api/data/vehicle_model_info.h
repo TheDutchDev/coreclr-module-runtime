@@ -47,6 +47,11 @@ struct ClrVehicleModelInfo
         canAttachCars(info.canAttachCars),
         handlingNameHash(info.handlingNameHash)
     {
+#ifdef _MSC_VER
+        auto s_strcpy = [](char* dest, std::size_t n, const char* src) { return strcpy_s(dest, n, src); };
+#else
+        auto s_strcpy = [](char* dest, std::size_t n, const char* src) { return strncpy(dest, src, n); };
+#endif
         size_t modkitsSize = std::size(info.modkits);
         for (size_t i = 0; i < modkitsSize; i++)
         {
@@ -54,7 +59,7 @@ struct ClrVehicleModelInfo
         }
 
         title = new char[info.title.length() + 1];
-        strcpy_s(title, info.title.length() + 1, info.title.c_str());
+        s_strcpy(title, info.title.length() + 1, info.title.c_str());
 
         const auto vehModelBones = info.bones;
         boneSize = vehModelBones.size();

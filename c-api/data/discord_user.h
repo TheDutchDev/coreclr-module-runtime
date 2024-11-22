@@ -12,19 +12,24 @@ struct ClrDiscordUser {
     ClrDiscordUser() = default;
 
     ClrDiscordUser(alt::IDiscordManager* discordManager) {
+#ifdef _MSC_VER
+        auto s_strcpy = [](char* dest, std::size_t n, const char* src) { return strcpy_s(dest, n, src); };
+#else
+        auto s_strcpy = [](char* dest, std::size_t n, const char* src) { return strncpy(dest, src, n); };
+#endif
         id = discordManager->GetUserID();
 
         auto usernameStr = discordManager->GetUsername();
         username = new char[usernameStr.length() + 1];
-        strcpy_s(username, usernameStr.length() + 1, usernameStr.c_str());
+        s_strcpy(username, usernameStr.length() + 1, usernameStr.c_str());
 
         auto discriminatorStr = discordManager->GetDiscriminator();
         discriminator = new char[discriminatorStr.length() + 1];
-        strcpy_s(discriminator, discriminatorStr.length() + 1, discriminatorStr.c_str());
+        s_strcpy(discriminator, discriminatorStr.length() + 1, discriminatorStr.c_str());
 
         auto avatarStr = discordManager->GetAvatar();
         avatar = new char[avatarStr.length() + 1];
-        strcpy_s(avatar, avatarStr.length() + 1,avatarStr.c_str());
+        s_strcpy(avatar, avatarStr.length() + 1,avatarStr.c_str());
     }
 
     ~ClrDiscordUser() {
