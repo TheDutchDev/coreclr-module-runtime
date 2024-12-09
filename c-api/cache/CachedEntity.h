@@ -18,6 +18,7 @@ namespace cache
                                       _rotation(base->GetRotation()),
                                       _visible(base->GetVisible()),
                                       _frozen(base->IsFrozen()),
+									  _staticEntity(base->IsStaticEntity()),	
 #ifdef ALT_SERVER_API
                                       _streamed(base->GetStreamed()),
                                       _collision(base->HasCollision()),
@@ -126,16 +127,22 @@ namespace cache
         {
             return _visible;
         }
-        bool _frozen;
+    	bool _frozen;
 
-        bool IsFrozen() const override
-        {
-            return _frozen;
-        }
+    	bool IsFrozen() const override
+    	{
+    		return _frozen;
+    	}
 
         void SetFrozen(bool state) override
         {
         }
+    	bool _staticEntity;
+
+    	bool IsStaticEntity() const override
+    	{
+    		return _staticEntity;
+    	}
 
 #ifdef ALT_SERVER_API
         void SetNetworkOwner(alt::IPlayer* player, bool disableMigration) override
@@ -215,6 +222,8 @@ namespace cache
         void SetMultipleStreamSyncedMetaData(const std::unordered_map<std::string, alt::MValue>& values) override {}
 
         void SetStreamingDistance(uint32_t streamingDistance) override {}
+
+    	void SetStaticEntity(bool state) override {}
 #endif
 
 
