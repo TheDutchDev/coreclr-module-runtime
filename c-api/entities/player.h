@@ -104,7 +104,7 @@ EXPORT_SERVER void Player_GetWeapons(alt::IPlayer* player, /** nint* */  weapon_
 EXPORT_SERVER uint8_t Player_HasWeapon(alt::IPlayer* player, uint32_t weapon);
 
 EXPORT_SERVER uint32_t Player_GetStreamedEntitiesCount(alt::IPlayer* player);
-EXPORT_SERVER void Player_GetStreamedEntities(alt::IPlayer* player, void**& entities, uint16_t distances[], uint8_t types[], uint32_t size);
+EXPORT_SERVER void Player_GetStreamedEntities(alt::IPlayer* player, void**& entities, uint8_t types[], uint16_t distances[], uint32_t size);
 
 EXPORT_SERVER void Player_SetArmor(alt::IPlayer* player, uint16_t armor);
 EXPORT_SERVER void Player_SetMaxArmor(alt::IPlayer* player, uint16_t armor);

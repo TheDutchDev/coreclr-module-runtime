@@ -356,7 +356,7 @@ uint32_t Player_GetStreamedEntitiesCount(alt::IPlayer* player) {
     return player->GetStreamedEntities().size();
 }
 
-void Player_GetStreamedEntities(alt::IPlayer* player,  void**& entities, uint16_t distances[], uint8_t types[], uint32_t size) {
+void Player_GetStreamedEntities(alt::IPlayer* player,  void**& entities, uint8_t types[], uint16_t distances[], uint32_t size) {
     auto playerStreamedEntities = player->GetStreamedEntities();
 
     if (playerStreamedEntities.size() < size) {
@@ -366,9 +366,10 @@ void Player_GetStreamedEntities(alt::IPlayer* player,  void**& entities, uint16_
     auto entityArr = new void*[size];
 
     for (uint32_t i = 0; i < size; i++) {
-        entityArr[i] = Util_GetBaseObjectPointer(playerStreamedEntities[i].first);
+        auto entity = playerStreamedEntities[i].first;
+        entityArr[i] = Util_GetBaseObjectPointer(entity);
+        types[i] = (uint8_t) entity->GetType();
         distances[i] = (uint16_t) playerStreamedEntities[i].second;
-        types[i] = (uint8_t) playerStreamedEntities[i].first->GetType();
     }
     entities = entityArr;
 }
