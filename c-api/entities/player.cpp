@@ -368,7 +368,7 @@ void Player_GetStreamedEntities(alt::IPlayer* player,  void**& entities, uint16_
     for (uint32_t i = 0; i < size; i++) {
         entityArr[i] = Util_GetBaseObjectPointer(playerStreamedEntities[i].first);
         distances[i] = (uint16_t) playerStreamedEntities[i].second;
-        types[i] = (uint8_t) playerStreamedEntities[i]->GetType();
+        types[i] = (uint8_t) playerStreamedEntities[i].first->GetType();
     }
     entities = entityArr;
 }
