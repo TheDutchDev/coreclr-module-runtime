@@ -101,8 +101,10 @@ EXPORT_SERVER void Player_SetCurrentWeapon(alt::IPlayer* player, uint32_t weapon
 
 EXPORT_SERVER uint64_t Player_GetWeaponCount(alt::IPlayer* player);
 EXPORT_SERVER void Player_GetWeapons(alt::IPlayer* player, /** nint* */  weapon_t*& weapons, uint32_t& size);
-
 EXPORT_SERVER uint8_t Player_HasWeapon(alt::IPlayer* player, uint32_t weapon);
+
+EXPORT_SERVER uint32_t Player_GetStreamedEntitiesCount(alt::IPlayer* player);
+EXPORT_SERVER void Player_GetStreamedEntities(alt::IPlayer* player, void**& entities, uint16_t distances[], uint8_t types[], uint32_t size);
 
 EXPORT_SERVER void Player_SetArmor(alt::IPlayer* player, uint16_t armor);
 EXPORT_SERVER void Player_SetMaxArmor(alt::IPlayer* player, uint16_t armor);
@@ -133,7 +135,7 @@ EXPORT_SERVER void Player_SetInvincible(alt::IPlayer* player, uint8_t state);
 
 EXPORT_SERVER void Player_SetIntoVehicle(alt::IPlayer* player, alt::IVehicle* vehicle, uint8_t seat);
 
-EXPORT_SERVER uint8_t Player_IsSuperJumpEnabled(alt::IPlayer* playere);
+EXPORT_SERVER uint8_t Player_IsSuperJumpEnabled(alt::IPlayer* player);
 EXPORT_SERVER uint8_t Player_IsCrouching(alt::IPlayer* player);
 EXPORT_SERVER uint8_t Player_IsStealthy(alt::IPlayer* player);
 

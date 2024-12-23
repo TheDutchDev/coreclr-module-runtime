@@ -352,6 +352,26 @@ void Player_GetWeapons(alt::IPlayer* player, weapon_t*& weapons, uint32_t& size)
     weapons = weaponsArr;
 }
 
+uint32_t Player_GetStreamedEntitiesCount(alt::IPlayer* player) {
+    return player->GetStreamedEntities().size();
+}
+
+void Player_GetStreamedEntities(alt::IPlayer* player,  void**& entities, uint16_t distances[], uint8_t types[], uint32_t size) {
+    auto playerStreamedEntities = player->GetStreamedEntities();
+
+    if (playerStreamedEntities.size() < size) {
+        size = playerStreamedEntities.size();
+    }
+
+    auto entityArr = new void*[size];
+
+    for (uint32_t i = 0; i < size; i++) {
+        entityArr[i] = Util_GetBaseObjectPointer(playerStreamedEntities[i].first);
+        distances[i] = (uint16_t) playerStreamedEntities[i].second;
+        types[i] = (uint8_t) playerStreamedEntities[i]->GetType();
+    }
+    entities = entityArr;
+}
 
 void Player_SetArmor(alt::IPlayer* player, uint16_t armor) {
     player->SetArmour(armor);

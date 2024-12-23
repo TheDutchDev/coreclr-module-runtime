@@ -1,6 +1,6 @@
 #include "func_table.h"
 
-inline uint64_t capiHash = 10075699596264467259UL;
+inline uint64_t capiHash = 13612278072387064778UL;
 inline uint64_t capiHashes[] = {
     0,
     #ifdef ALT_CLIENT_API
@@ -1537,6 +1537,8 @@ inline uint64_t capiHashes[] = {
     7490273379384857895UL,
     17452312619664438538UL,
     17807664466527734655UL,
+    16539572063395996721UL,
+    13915984405046061551UL,
     2928381910125083497UL,
     17600594564491002166UL,
     3618744060322552484UL,
@@ -3354,6 +3356,8 @@ inline void* capiPointers[] = {
     (void*) Player_GetSendNames,
     (void*) Player_GetSocialClubName,
     (void*) Player_GetSocialID,
+    (void*) Player_GetStreamedEntities,
+    (void*) Player_GetStreamedEntitiesCount,
     (void*) Player_GetWeaponAmmo,
     (void*) Player_GetWeaponCount,
     (void*) Player_GetWeapons,
