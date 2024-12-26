@@ -246,6 +246,10 @@ uint64_t Player_GetHwidExHash(alt::IPlayer* player) {
     return player->GetHwidExHash();
 }
 
+const char* Player_GetHwid3(alt::IPlayer* player, int32_t& size) {
+    return AllocateString(player->GetHwid3(), size);
+}
+
 const char* Player_GetAuthToken(alt::IPlayer* player, int32_t& size) {
     return AllocateString(player->GetAuthToken(), size);
 }
