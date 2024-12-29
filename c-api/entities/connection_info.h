@@ -22,6 +22,7 @@ EXPORT_SERVER uint64_t ConnectionInfo_GetSocialId(alt::IConnectionInfo* connecti
 EXPORT_SERVER const char* ConnectionInfo_GetSocialName(alt::IConnectionInfo* connectionInfo, int32_t& size);
 EXPORT_SERVER uint64_t ConnectionInfo_GetHwIdHash(alt::IConnectionInfo* connectionInfo);
 EXPORT_SERVER uint64_t ConnectionInfo_GetHwIdExHash(alt::IConnectionInfo* connectionInfo);
+EXPORT_SERVER const char* ConnectionInfo_GetHwid3(alt::IConnectionInfo* connectionInfo, int32_t& size);
 EXPORT_SERVER const char* ConnectionInfo_GetAuthToken(alt::IConnectionInfo* connectionInfo, int32_t& size);
 EXPORT_SERVER uint8_t ConnectionInfo_GetIsDebug(alt::IConnectionInfo* connectionInfo);
 EXPORT_SERVER const char* ConnectionInfo_GetBranch(alt::IConnectionInfo* connectionInfo, int32_t& size);
